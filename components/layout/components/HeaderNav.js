@@ -1,45 +1,56 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const HeaderNav = () => {
+  const Router = useRouter();
+
   return (
     <HeaderNavWrapper>
-      <HeaderNavLinks>
-        Campaigns
-      </HeaderNavLinks>
-      <HeaderNavLinks>
-        Create Campaign
-      </HeaderNavLinks>
-      <HeaderNavLinks>
-        Dashboard
-      </HeaderNavLinks>
+      <Link href={"/"}>
+        <HeaderNavLinks active={Router.pathname == "/" ? true : false}>
+          Campaigns
+        </HeaderNavLinks>
+      </Link>
+      <Link href={"/createcampaign"}>
+        <HeaderNavLinks
+          active={Router.pathname == "/createcampaign" ? true : false}>
+          Create Campaign
+        </HeaderNavLinks>
+      </Link>
+      <Link href={"/dashboard"}>
+        <HeaderNavLinks active={Router.pathname == "/dashboard" ? true : false}>
+          Dashboard
+        </HeaderNavLinks>
+      </Link>
     </HeaderNavWrapper>
-  )
-}
+  );
+};
 
 const HeaderNavWrapper = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
   background-color: ${(props) => props.theme.bgDiv};
-  padding:6px;
+  padding: 6px;
   height: 50%;
-  border-radius:10px;
-
-`
+  border-radius: 10px;
+`;
 
 const HeaderNavLinks = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.bgSubDiv};
-  font-family:'Roboto';
-  margin:8px;
-  padding:2px 5px;
-  border-radius:5px;
-  cursor:pointer;
-  text-transform:uppercase;
-  font-weight:bold;
-  font-size:16px;
-`
+  background-color: ${(props) =>
+    props.active ? props.theme.bgSubDiv : props.theme.bgDiv};
+  font-family: "Roboto";
+  margin: 8px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+`;
 
-export default HeaderNav
+export default HeaderNav;
